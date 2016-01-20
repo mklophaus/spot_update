@@ -2,9 +2,11 @@ var express      = require('express');
 var path         = require('path');
 var favicon      = require('serve-favicon');
 var logger       = require('morgan');
+var cookieParser = require('cookie-parser');
 var bodyParser   = require('body-parser');
 var debug        = require('debug')('app:http');
-var cookieParser = require('cookie-parser');
+var session = require('express-session');
+var passport = require('passport');
 
 // Load local libraries.
 var env      = require('./config/environment'),
@@ -31,13 +33,33 @@ app.use(logger('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 
-app.use(cookieParser('notsosecretnowareyou'));
+app.use(cookieParser());
 
-// Routing layers: favicon, static assets, dynamic routes, or 404…
+//Passport middleware!
+app.use(session({ secret: 'Check!',
+                  resave: false,
+                  saveUninitialized: true
+}));
+
+ app.use(passport.initialize());
+ app.use(passport.session());
+
+app.use(require('node-sass-middleware')({
+  src: path.join(__dirname, 'public'),
+  dest: path.join(__dirname, 'public'),
+  indentedSyntax: false,
+  sourceMap: false
+}));
+
 
 // Routes to static assets. Uncomment below if you have a favicon.
 // app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));
 app.use(express.static(path.join(__dirname, 'public')));
+
+require('./config/passport')(passport);
+
+// index mounts all routes
+require('./config/routes')(app, passport);
 
 // Useful for debugging the state of requests.
 app.use(debugReq);
