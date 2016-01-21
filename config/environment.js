@@ -1,7 +1,7 @@
 var _ = require('lodash');
 
 var localEnvVars = {
-  TITLE:      'spot_update',
+  TITLE:      'Spot Update',
   SAFE_TITLE: 'spot_update'
 };
 
