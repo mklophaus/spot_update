@@ -14,8 +14,6 @@ router.get('/users',     usersController.index);
 router.get('/users/:id', usersController.show);
 
 
-
-
 router.get('/auth/google', passport.authenticate(
   'google',
   { scope: ['profile', 'email'] }
@@ -34,13 +32,12 @@ router.get('/logout', function(req, res){
   res.redirect('/');
 });
 
-
-
-
-
-
-
-
-
+function isLoggedIn(req, res, next) {
+  if ( req.isAuthenticated() ) {
+    return next();
+  } else {
+    res.redirect('/');
+  }
+}
 
 module.exports = router;
