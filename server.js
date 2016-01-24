@@ -13,6 +13,10 @@ var env      = require('./config/environment'),
     mongoose = require('./config/database'),
     routes   = require('./config/routes');
 
+// load the env vars
+require('dotenv').load();
+
+
 // Instantiate a server application.
 var app = express();
 
@@ -22,6 +26,8 @@ app.set('safe-title', env.SAFE_TITLE);
 // EJS view engine config
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
+require('ejs').delimiter = '$';
+
 
 // Create local variables for use thoughout the application.
 app.locals.title = app.get('title');
@@ -59,7 +65,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 require('./config/passport')(passport);
 
 // index mounts all routes
-require('./config/routes')(app, passport);
+require('./config/routes');
 
 // Useful for debugging the state of requests.
 app.use(debugReq);
