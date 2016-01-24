@@ -10,10 +10,10 @@ module.exports = function(passport){
   },
 
   function(accessToken, refreshToken, profile, done) {
-    User.findOne({ 'googleId': profile.id }, function(err, student) {
+    User.findOne({ 'googleId': profile.id }, function(err, user) {
       if (err) return done(err);
       //(null) refers to no error...
-      if (student) { return done(null, student);
+      if (user) { return done(null, user);
      } else {
    // we have a new student via OAuth!
          var newUser = new User({
@@ -33,7 +33,7 @@ module.exports = function(passport){
 ));
 
   passport.serializeUser(function(user, done) {
-    done(null, student.id);
+    done(null, user.id);
   });
 
   passport.deserializeUser(function(id, done) {

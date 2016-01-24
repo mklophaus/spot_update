@@ -9,10 +9,13 @@ var usersController   = require('../controllers/users');
 // root path:
 router.get('/', welcomeController.index);
 
+router.get('/', function(req, res) {
+  res.render('index', { user: req.user });
+});
+
 // users resource paths:
 router.get('/users',     usersController.index);
 router.get('/users/:id', usersController.show);
-
 
 router.get('/auth/google', passport.authenticate(
   'google',
