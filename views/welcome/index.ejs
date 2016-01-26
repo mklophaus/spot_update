@@ -32,10 +32,24 @@
     </ul>
 
 
+    <ul id="messages"></ul><hr>
+
+    <form action="">
+      <label>Your Name:</label><input id="user-name"><br><br>
+      <label>Message:</label><textarea id="new-msg"></textarea><br><br>
+      <input type="button" id="btn-send-msg" value=" Send Message ">
+    </form>
+
 
 
   </main>
 
-  <$- include('../partials/scripts') $>
+<!--   <$- include('../partials/scripts') $>
+ -->
+
+    <script src="/socket.io/socket.io.js"></script>
+    <script src="/js/main.js"></script>
 </body>
+
+
 </html>
