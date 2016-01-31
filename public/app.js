@@ -3,7 +3,7 @@
   angular
     .module("spotApp", [
       "ui.router",
-      "uiGmapgoogle-maps"    ])
+      "uiGmapgoogle-maps"    ]);
 
     // .config(function($httpProvider) {
     //   $httpProvider.interceptors.push('authInterceptor');
