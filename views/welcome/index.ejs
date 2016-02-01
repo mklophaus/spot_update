@@ -40,15 +40,72 @@
       <input type="button" id="btn-send-msg" value=" Send Message ">
     </form>
 
-
-
   </main>
+
+         <div class="container">
+                <div class="row">
+                    <div class="col-md-12">
+                    <br>
+                    <br>
+                        <h1 class="center"><i class="oi oi-magnifying-glass"></i> Spots</h1>
+                        <div class="map">
+
+                                  <div id="searchBoxParent">
+                                    <label><strong>Location: <strong></label>
+                                  </div>
+                                  <br>
+                                  <div ng-show="AfterSubmit" class="col-md-3">
+                                    <pre>{{ngModel}}</pre>
+                                    <h4>check</h4>
+                                  </div>
+
+                                    <ui-gmap-google-map
+                                            center="map.center"
+                                            zoom="map.zoom"
+                                            dragging="map.dragging"
+                                            bounds="map.bounds"
+                                            events="map.events"
+                                            options="map.options"
+                                            pan="true"
+                                            control="map.control"
+                                            >
+                                        <!--to add as a map control -->
+                                        <ui-gmap-search-box options="searchbox.options" template="searchbox.template"
+                                          parentdiv="searchbox.parentdiv" ng-model="searchModel.searchTerm"
+                                                        events="searchbox.events" position="searchbox.position"></ui-gmap-search-box>
+
+                                         <ui-gmap-markers models="markers" coords="'self'" icon="'icon'">
+
+                                              <ui-gmap-windows show="show">
+<!--
+                                                      <div ng-non-bindable>
+                                                      <strong>Title of Document: </strong>{{title}}
+                                                      <br>
+                                                      <strong>Subject: </strong>{{subject}}
+                                                      <br>
+                                                      <strong>Author: </strong>{{author}}
+                                                      </div> -->
+                                              </ui-gmap-windows>
+
+                                          </ui-gmap-markers>
+
+                                    </ui-gmap-google-map>
+                        </div>
+                        <br>
+                        <!-- Begin Content -->
+
+                    </div>
+                </div>
+            </div>
 
 <!--   <$- include('../partials/scripts') $>
  -->
 
     <script src="/socket.io/socket.io.js"></script>
     <script src="/js/main.js"></script>
+
+
+
 </body>
 
 
